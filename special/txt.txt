@@ -1,1 +1,1 @@
-txt
+module of a complex number with a sign from a DFT transform in open office
