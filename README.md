@@ -21,6 +21,7 @@ http://www.mediafire.com/file/59bpnci966ulec9/DFT+FFT+RADIX-2+DIT+algorytm+Trans
     //in F(30) is 30*0,671 Hz =20,13 Hz that means in F(30) we will see what value has our signal in 20,13 Hz
 
 
+<pre>
 //-------------------------------
 //when you want to have equal results that are in that false modificator in normal FFT then change this:
 /*
@@ -64,3 +65,4 @@ void fun_inverse_fourier_transform_FFT_mixed_radix(int N,std::complex<double> ta
 
 }
 */
+</pre>
