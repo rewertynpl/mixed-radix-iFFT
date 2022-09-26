@@ -13,7 +13,7 @@ http://www.mediafire.com/file/hyz4dbski4w00pb/inverse+fourier+transform+iDFT+iff
 http://www.mediafire.com/file/59bpnci966ulec9/DFT+FFT+RADIX-2+DIT+algorytm+Transformacja+Fouriera+analitycznie+v3.4.xlsx 
 #
     //assumption: if N==signal period in table tab[] then resolution = 1 Hz but N=2^b;
-    //when we have signal period 22000 Hz and N=2^15=32768 then
+    //when we have signal period 22000 Hz and N=2^15=32768 then MAYBE
     //the fundamental frequency is 0,671 Hz
     //that means that in F(1) is 1*0,671 Hz =0,671 Hz
     //in F(2) is 2*0,671 Hz =1,342 Hz
