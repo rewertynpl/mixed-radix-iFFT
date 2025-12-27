@@ -371,31 +371,7 @@ a1++;
     return 0;
 }
 
-void fun_inverse_bits_radix_4(int N,std::complex<double> tab[])
-{
-//code by Sidney Burrus
-//http://dsp.stackexchange.com/questions/3481/radix-4-fft-implementation
-    std::complex<double> t;
-    //N=4^a;
-    // Radix-4 bit-reverse
-    double T;
-    int j = 0;
-    int N2 = N>>2;
-    int M=0;
-    for (int i=0; i < N-1; i++) {
-        if (i < j) {
-            t = tab[i];
-            tab[i] = tab[j];
-            tab[j] = t;
-        }
-        M = N2;
-        while ( j >= 3*M ) {
-            j -= 3*M;
-            M >>= 2;
-        }
-        j += M;
-    }
-}
+
 ///////////////
 void fun_fourier_transform_DFT(int N,std::complex<double> tab[])
 {
@@ -1726,4 +1702,5 @@ fun_inverse_fourier_transform_FFT_radix_4_N_256_official
 
 //haven't try it with other function that cos(x)+jsin(x)=sin(x+pi/2)+jsin(x) that is mirror inverse
 */
+
 
