@@ -140,3 +140,101 @@ int main() {
     delete[] signal;
     return 0;
 }
+
+
+In this source code i have my own implementation of inverse_bits that is universal for all radix:
+
+# FFT Inverse Table Permutation
+
+This module provides a C++ implementation for permuting an array of complex numbers. It is a key step in Fast Fourier Transform (FFT) algorithms, specifically performing the index reordering (digit-reversal) necessary for mixed-radix FFT implementations.
+
+## Functionality
+
+The `fun_inverse_table_FFT` function:
+1. Accepts the array size `M` and an array of complex numbers `tab`.
+2. Calculates the new index order based on the prime factor decomposition (radix).
+3. Permutes the elements of `tab` in place using temporary buffers.
+
+## Code
+
+```cpp
+#include <complex>
+#include <iostream>
+
+// NOTE: This function requires the definition of a helper function 'radix_base'.
+// int radix_base(int M, int* stg);
+
+void fun_inverse_table_FFT(int M, std::complex<double> tab[])
+{
+    int rx5=5,rx4=4,rx3=3,rx2=2,rx7=7,rx11=11;
+    int stg[100]={};
+    int *tab8 = new int[M];
+    int *tab9 = new int[M];
+    std::complex<double> *tab11 = new std::complex<double>[M];
+    int nb_stages=0;
+    int nb1=0;
+    int nb2=0;
+    int nb3=0;
+
+    nb_stages=6;
+
+    // External function to determine radices
+    nb_stages=radix_base(M,stg);
+
+    for(int i=0;i<M;i++)
+    {
+        //tab9[i]=tab2[i];
+        //tab8[i]=tab2[i];
+        tab9[i]=i;
+        tab8[i]=i;
+    }
+
+    nb3=1;
+    for(int op=nb_stages;op>=2;op--)
+    {
+        nb1=stg[op];
+        nb3=nb3*stg[op];
+
+        if(op==nb_stages)
+        {
+            nb2=stg[0];
+        }
+        else
+        {
+            nb2=nb2*stg[op+1];
+        }
+
+           for(int i=0,n=0,p=0;i<M;i=i+M/nb3,n++)
+        {
+            if(n>=nb1)
+            {
+                n=0,p=p+M/nb2;
+            }
+            for(int j=0,k=0;j<M/nb3;j++,k=k+nb1)
+            {
+                if(op%2==0)
+                {
+                    tab8[i+j]=tab9[k+n+p];
+                }
+                else
+                {
+                    tab9[i+j]=tab8[k+n+p];
+                }
+            }
+        }
+    }
+
+    for(int i=0;i<M;i++)
+    {
+      tab11[i]=tab[tab8[i]];
+
+    }
+    for(int i=0;i<M;i++)
+    {
+      tab[i]=tab11[i];
+    }
+
+    delete [] tab8;
+    delete [] tab9;
+    delete [] tab11;
+}
